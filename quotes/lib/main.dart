@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
-import 'package:isar_connect/isar_connect.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:quotes/load_quotes.dart';
 import 'package:quotes/quote.dart';
@@ -8,7 +7,6 @@ import 'package:quotes/quotes_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initializeIsarConnect();
   final isar = await Isar.open(
     schemas: [QuoteSchema],
     directory: (await getApplicationDocumentsDirectory()).path,
