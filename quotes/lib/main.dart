@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
@@ -7,9 +8,11 @@ import 'package:quotes/quotes_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final path = !kIsWeb ? (await getApplicationDocumentsDirectory()).path : null;
   final isar = await Isar.open(
     schemas: [QuoteSchema],
-    directory: (await getApplicationDocumentsDirectory()).path,
+    directory: path,
+    inspector: true
   );
   runApp(QuotesApp(
     isar: isar,
