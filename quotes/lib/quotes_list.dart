@@ -8,7 +8,7 @@ import 'package:quotes/quote.dart';
 class QuotesList extends StatefulWidget {
   final Isar isar;
 
-  QuotesList({required this.isar});
+  const QuotesList({Key? key, required this.isar}) : super(key: key);
 
   @override
   _QuotesListState createState() => _QuotesListState();
@@ -95,16 +95,16 @@ class _QuotesListState extends State<QuotesList> {
                 child: TextField(
                   controller: searchController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                     hintText: 'Search quote',
                     suffixIcon: IconButton(
                       onPressed: searchController.clear,
-                      icon: Icon(Icons.clear),
+                      icon: const Icon(Icons.clear),
                     ),
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () async {
                   await widget.isar.writeTxn((isar) async {
@@ -112,7 +112,7 @@ class _QuotesListState extends State<QuotesList> {
                   });
                   loadMore(newAuthor: author);
                 },
-                child: Text('Drop results'),
+                child: const Text('Drop results'),
               )
             ],
           ),
@@ -121,18 +121,18 @@ class _QuotesListState extends State<QuotesList> {
           Center(
             child: Chip(
               label: Text(author),
-              deleteIcon: Icon(Icons.clear),
-              labelPadding: EdgeInsets.all(6),
+              deleteIcon: const Icon(Icons.clear),
+              labelPadding: const EdgeInsets.all(6),
               onDeleted: () {
                 loadMore(newAuthor: '');
               },
             ),
           )
         else
-          Center(
+          const Center(
             child: Text('Tap author to filter'),
           ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -155,7 +155,7 @@ class _QuotesListState extends State<QuotesList> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         AspectRatio(
                           aspectRatio: 1,
                           child: _buildQuote(context, quotes[index]),
@@ -199,7 +199,7 @@ class _QuotesListState extends State<QuotesList> {
                 minFontSize: 8,
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Align(
               alignment: Alignment.centerRight,
               child: InkWell(
@@ -208,7 +208,7 @@ class _QuotesListState extends State<QuotesList> {
                 },
                 child: AutoSizeText(
                   quote.author,
-                  style: TextStyle(color: Colors.blue),
+                  style: const TextStyle(color: Colors.blue),
                 ),
               ),
             ),

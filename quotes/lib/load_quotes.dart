@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:isar/isar.dart';
 import 'quote.dart';
+import 'dart:developer';
 
 class LoadQuotes extends StatefulWidget {
   final Isar isar;
 
-  LoadQuotes({required this.isar});
+  const LoadQuotes({Key? key, required this.isar}) : super(key: key);
 
   @override
   _LoadQuotesState createState() => _LoadQuotesState();
@@ -24,22 +25,22 @@ class _LoadQuotesState extends State<LoadQuotes> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Hey there!',
             style: TextStyle(fontSize: 20),
           ),
-          SizedBox(height: 10),
-          SizedBox(
+          const SizedBox(height: 10),
+          const SizedBox(
             width: 250,
             child: Text(
                 'The quotes are not loaded yet. Do you load them from the assets?'),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ElevatedButton(
             onPressed: loadQuotes,
-            child: Text('Load Quotes!'),
+            child: const Text('Load Quotes!'),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           if (_error != null) Text(_error!),
         ],
       ),
@@ -49,7 +50,7 @@ class _LoadQuotesState extends State<LoadQuotes> {
   void loadQuotes() async {
     try {
       final bytes = await rootBundle.load('assets/quotes.json');
-      final jsonStr = Utf8Decoder().convert(bytes.buffer.asUint8List());
+      final jsonStr = const Utf8Decoder().convert(bytes.buffer.asUint8List());
       final json = jsonDecode(jsonStr) as List;
       final quotes = json.map((e) => Quote()
         ..text = e['text']
@@ -58,7 +59,7 @@ class _LoadQuotesState extends State<LoadQuotes> {
         await isar.quotes.putAll(quotes.toList());
       });
     } catch (e) {
-      print(e);
+      log("ERROR: $e");
       setState(() {
         _error = e.toString();
       });

@@ -19,8 +19,7 @@ void main() async {
 class QuotesApp extends StatelessWidget {
   final Isar isar;
 
-  QuotesApp({required this.isar});
-
+  const QuotesApp({Key? key, required this.isar}) : super(key: key);
   Stream<List<Quote>> execQuery() {
     return isar.quotes.where().limit(1).build().watch(initialReturn: true);
   }
@@ -43,7 +42,7 @@ class QuotesApp extends StatelessWidget {
                   );
                 }
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
